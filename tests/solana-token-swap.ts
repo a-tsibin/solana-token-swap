@@ -49,7 +49,10 @@ describe("solana-token-swap", () => {
   it("Swap test", async () => {
     const owner = initializeKeypair();
     console.log("Owner:", owner.publicKey.toString());
-    await connection.requestAirdrop(owner.publicKey, web3.LAMPORTS_PER_SOL * 5);
+    const signature = await connection.requestAirdrop(owner.publicKey, web3.LAMPORTS_PER_SOL * 5);
+    await connection.confirmTransaction(signature);
+    let balance = await connection.getBalance(owner.publicKey)
+    console.log("Owner balance:", balance);
 
     const swapPayer = new web3.Account(owner.secretKey);
     console.log("Swap payer:", swapPayer.publicKey.toString());
@@ -175,6 +178,5 @@ describe("solana-token-swap", () => {
         TOKEN_SWAP_PROGRAM_ID,
         swapPayer
     );
-
   });
 });
