@@ -193,7 +193,7 @@ describe("solana-token-swap", () => {
             mintA,
             userAccountA.address,
             owner,
-            100000
+            10000
         );
         const userTransferAuthority = new web3.Account();
         await approve(
@@ -202,7 +202,7 @@ describe("solana-token-swap", () => {
             userAccountA.address,
             userTransferAuthority.publicKey,
             owner,
-            100000
+            10000
         );
 
         console.log("Creating swap token B account");
@@ -229,8 +229,8 @@ describe("solana-token-swap", () => {
             userAccountB.address,
             hostFeeAccount,
             userTransferAuthority,
-            100000,
-            90000
+            10000,
+            9000
         );
         console.log("Swap transaction:", trn);
         await sleep(5000);
